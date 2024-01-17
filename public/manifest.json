@@ -1,7 +1,10 @@
 {
+    "manifest_version": 3,
     "name": "Distraction-Less Instagram",
     "description": "Remove distracting features from Instagram",
     "version": "1.0",
-    "action": {},
-    "manifest_version": 3
+    "action": {
+        "default_popup": "options.html",
+        "default_icon": "icons/icon.png"
+    }
 }
