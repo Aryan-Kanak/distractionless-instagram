@@ -3,8 +3,19 @@
     "name": "Distraction-Less Instagram",
     "description": "Remove distracting features from Instagram",
     "version": "1.0",
+    "permissions": [
+        "storage"
+    ],
     "action": {
         "default_popup": "options.html",
         "default_icon": "icons/icon.png"
-    }
+    },
+    "content_scripts": [
+        {
+          "js": ["hideContent.js"],
+          "matches": [
+            "https://www.instagram.com/*"
+          ]
+        }
+      ]
 }
