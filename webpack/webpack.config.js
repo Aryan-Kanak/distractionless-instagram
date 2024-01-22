@@ -5,6 +5,7 @@ module.exports = {
    entry: {
      options: path.resolve(__dirname, "..", "src", "options.ts"),
      hideContent: path.resolve(__dirname, "..", "src", "hideContent.ts"),
+     background: path.resolve(__dirname, "..", "src", "background.ts"),
    },
    output: {
       path: path.join(__dirname, "../dist"),

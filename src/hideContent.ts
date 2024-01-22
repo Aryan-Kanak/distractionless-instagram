@@ -1,6 +1,7 @@
 hideContent();
 
 async function hideContent(): Promise<void> {
+    console.log("Distraction Free Instagram: hiding content");
     // get state from local storage
     let result = await chrome.storage.local.get("hide-suggested-posts");
     let suggestedPosts: boolean = result["hide-suggested-posts"] as boolean;
@@ -36,36 +37,50 @@ async function hideContent(): Promise<void> {
     }
 }
 
-function hideSuggestedPosts(): void {
-    
+export function hideSuggestedPosts(): void {
+    let suggestedPosts: NodeListOf<HTMLElement> = document.querySelectorAll("span, article");
+    let i: number = 0;
+    while (i < suggestedPosts.length) {
+        if (suggestedPosts[i].innerHTML == "Suggested Posts") {
+            suggestedPosts[i].style.display = "none";
+            break;
+        }
+        i++;
+    }
+    while (i < suggestedPosts.length) {
+        if (suggestedPosts[i].nodeName == "ARTICLE") {
+            suggestedPosts[i].style.display = "none";
+        }
+        i++;
+    }
 }
 
-function hideExplore(): void {
-    let exploreButton = document.querySelector("a[href='/explore/'");
+export function hideExplore(): void {
+    let exploreButton: HTMLElement | null = document.querySelector("a[href='/explore/'") as HTMLElement;
     if (exploreButton != null) {
-        exploreButton.remove();
+        exploreButton.style.display = "none";
     } else {
         console.log("ERROR: Explore button not found");
     }
 }
 
-function hideReels(): void {
-    let reelsButton = document.querySelector("a[href='/reels/'");
+export function hideReels(): void {
+    let reelsButton : HTMLElement = document.querySelector("a[href='/reels/'") as HTMLElement;
     if (reelsButton != null) {
-        reelsButton.remove();
+        reelsButton.style.display = 'none';
     } else {
         console.log("ERROR: Reels button not found");
     }
 }
 
-function hideStories(): void {
+export function hideStories(): void {
     
 }
 
-function hideComments(): void {
+export function hideComments(): void {
     
 }
 
-function hideSuggestedProfiles(): void {
+export function hideSuggestedProfiles(): void {
     
 }

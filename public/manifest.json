@@ -4,18 +4,14 @@
     "description": "Remove distracting features from Instagram",
     "version": "1.0",
     "permissions": [
-        "storage"
+        "storage", "scripting", "webRequest"
     ],
+    "host_permissions": ["https://www.instagram.com/*"],
     "action": {
         "default_popup": "options.html",
         "default_icon": "icons/icon.png"
     },
-    "content_scripts": [
-        {
-          "js": ["hideContent.js"],
-          "matches": [
-            "https://www.instagram.com/*"
-          ]
-        }
-      ]
+    "background": {
+      "service_worker": "background.js"
+    }
 }
