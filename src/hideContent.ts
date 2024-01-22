@@ -48,7 +48,7 @@ export function hideSuggestedPosts(): void {
         i++;
     }
     while (i < suggestedPosts.length) {
-        if (suggestedPosts[i].nodeName == "ARTICLE") {
+        if (suggestedPosts[i].nodeName == "ARTICLE" && suggestedPosts[i].getAttribute("role") != "presentation") {
             suggestedPosts[i].style.display = "none";
         }
         i++;
@@ -65,9 +65,9 @@ export function hideExplore(): void {
 }
 
 export function hideReels(): void {
-    let reelsButton : HTMLElement = document.querySelector("a[href='/reels/'") as HTMLElement;
+    let reelsButton: HTMLElement | null = document.querySelector("a[href='/reels/'") as HTMLElement;
     if (reelsButton != null) {
-        reelsButton.style.display = 'none';
+        reelsButton.style.display = "none";
     } else {
         console.log("ERROR: Reels button not found");
     }
@@ -78,9 +78,32 @@ export function hideStories(): void {
 }
 
 export function hideComments(): void {
-    
+    let stories: HTMLElement | null = document.querySelector("div[role='menu'") as HTMLElement;
+    if (stories != null) {
+        stories.style.display = "none";
+    } else {
+        console.log("ERROR: Stories not found");
+    }
 }
 
 export function hideSuggestedProfiles(): void {
-    
+    let spans: HTMLCollectionOf<HTMLElement> = document.getElementsByTagName("span");
+    let suggestedForYouText: HTMLElement | null = null;
+    for (let i = 0; i < spans.length; ++i) {
+        if (spans[i].innerHTML == "Suggested for you") {
+            suggestedForYouText = spans[i];
+            break;
+        }
+    }
+    if (spans == null) {
+        console.log("ERROR: suggested for you text not found");
+        return;
+    }
+    let suggestedProfiles: HTMLElement | null | undefined =
+    suggestedForYouText?.parentElement?.parentElement?.parentElement?.parentElement;
+    if (suggestedProfiles == null || suggestedProfiles == undefined) {
+        console.log("ERROR: suggested profiles not found");
+        return;
+    }
+    suggestedProfiles.style.display = "none";
 }
