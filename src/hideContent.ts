@@ -74,16 +74,16 @@ export function hideReels(): void {
 }
 
 export function hideStories(): void {
-    
-}
-
-export function hideComments(): void {
     let stories: HTMLElement | null = document.querySelector("div[role='menu'") as HTMLElement;
     if (stories != null) {
         stories.style.display = "none";
     } else {
         console.log("ERROR: Stories not found");
     }
+}
+
+export function hideComments(): void {
+    
 }
 
 export function hideSuggestedProfiles(): void {
