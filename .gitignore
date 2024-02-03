@@ -295,5 +295,6 @@ $RECYCLE.BIN/
 *.lnk
 
 todo.txt
+final.zip
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,windows,macos,linux,test
