@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Distraction-Less Instagram",
-    "description": "Remove distracting features from Instagram",
+    "description": "A chrome extension that removes distracting features from Instagram",
     "version": "1.0",
     "permissions": [
         "storage", "scripting", "webRequest"
