@@ -1,5 +1,63 @@
 html
 {
-    width: 200px;
+    width: 300px;
     height: 400px;
+}
+
+body {
+    background-color: #EDD2E0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+h1 {
+    color: #1A1B25;
+    text-align: center;
+}
+
+#optionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    color: black;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid black;
+    border-radius: 0.15em;
+    transform: translateY(0.075em);
+}
+
+input[type="checkbox"]::before {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 2px;
+    background: transparent;
+    top: 2px;
+    left: 1px;
+    border: 3px solid white;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+}
+
+input[type="checkbox"]:checked {
+    background-color: black;
+}
+
+input[type=checkbox]:checked::before {
+    opacity: 1;
+}
+
+.optionText {
+    color: #1A1B25;
+    font-size: medium;
 }

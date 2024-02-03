@@ -15,78 +15,84 @@ async function hideContent(): Promise<void> {
     let comments: boolean = result["hide-comments"] as boolean;
     result = await chrome.storage.local.get("hide-suggested-profiles");
     let suggestedProfiles: boolean = result["hide-suggested-profiles"] as boolean;
-    
+
     // hide content
-    if (suggestedPosts) {
-        hideSuggestedPosts();
-    }
-    if (explore) {
-        hideExplore();
-    }
-    if (reels) {
-        hideReels();
-    }
-    if (stories) {
-        hideStories();
-    }
-    if (comments) {
-        hideComments();
-    }
-    if (suggestedProfiles) {
-        hideSuggestedProfiles();
-    }
+    hideSuggestedPosts(suggestedPosts);
+    hideExplore(explore);
+    hideReels(reels)
+    hideStories(stories);
+    //hideComments(comments);
+    hideSuggestedProfiles(suggestedProfiles);
 }
 
-export function hideSuggestedPosts(): void {
+export function hideSuggestedPosts(hidden: boolean = true): void {
     let suggestedPosts: NodeListOf<HTMLElement> = document.querySelectorAll("span, article");
     let i: number = 0;
+    let postContainer: HTMLElement | null = null;
+    if (suggestedPosts.length > 1) {
+        postContainer = suggestedPosts[0].parentElement;
+    }
+
+    // remove posts
     while (i < suggestedPosts.length) {
         if (suggestedPosts[i].innerHTML == "Suggested Posts") {
-            suggestedPosts[i].style.display = "none";
+            suggestedPosts[i].style.display = hidden ? "none" : "block";
             break;
         }
-        i++;
+        ++i;
     }
     while (i < suggestedPosts.length) {
         if (suggestedPosts[i].nodeName == "ARTICLE" && suggestedPosts[i].getAttribute("role") != "presentation") {
-            suggestedPosts[i].style.display = "none";
+            suggestedPosts[i].style.display = hidden ? "none" : "block";
         }
-        i++;
+        ++i;
+    }
+
+    // ensure no new posts can be seen
+    if (postContainer != null) {
+        postContainer.style.maxHeight = postContainer.offsetHeight.toString();
+        postContainer.style.height = "100%";
     }
 }
 
-export function hideExplore(): void {
+export function hideExplore(hidden: boolean = true): void {
     let exploreButton: HTMLElement | null = document.querySelector("a[href='/explore/'") as HTMLElement;
     if (exploreButton != null) {
-        exploreButton.style.display = "none";
+        exploreButton.style.display = hidden ? "none" : "block";
     } else {
         console.log("ERROR: Explore button not found");
     }
 }
 
-export function hideReels(): void {
+export function hideReels(hidden: boolean = true): void {
     let reelsButton: HTMLElement | null = document.querySelector("a[href='/reels/'") as HTMLElement;
     if (reelsButton != null) {
-        reelsButton.style.display = "none";
+        reelsButton.style.display = hidden ? "none" : "block";
     } else {
         console.log("ERROR: Reels button not found");
     }
 }
 
-export function hideStories(): void {
+export function hideStories(hidden: boolean = true): void {
     let stories: HTMLElement | null = document.querySelector("div[role='menu'") as HTMLElement;
     if (stories != null) {
-        stories.style.display = "none";
+        stories.style.display = hidden ? "none" : "block";
     } else {
         console.log("ERROR: Stories not found");
     }
 }
 
-export function hideComments(): void {
-    
+export function hideComments(hidden: boolean = true): void {
+    let posts: HTMLCollectionOf<HTMLElement> = document.getElementsByTagName("article");
+    for (let i: number = 0; i < posts.length; ++i) {
+        let spans: HTMLCollectionOf<HTMLElement> = posts[i].getElementsByTagName("span");
+        for (let j: number = 12; j < spans.length; ++j) {
+            spans[j].style.display = hidden ? "none" : "block";
+        }
+    }
 }
 
-export function hideSuggestedProfiles(): void {
+export function hideSuggestedProfiles(hidden: boolean = true): void {
     let spans: HTMLCollectionOf<HTMLElement> = document.getElementsByTagName("span");
     let suggestedForYouText: HTMLElement | null = null;
     for (let i = 0; i < spans.length; ++i) {
@@ -105,5 +111,5 @@ export function hideSuggestedProfiles(): void {
         console.log("ERROR: suggested profiles not found");
         return;
     }
-    suggestedProfiles.style.display = "none";
+    suggestedProfiles.style.display = hidden ? "none" : "block";
 }

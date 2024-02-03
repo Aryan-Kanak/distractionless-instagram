@@ -1,22 +1,41 @@
 <!doctype html>
 <html>
-    <head> 
-        <link rel="stylesheet" href="options.css"/>
-    </head>
-    <body>
-        <h1>Options</h1>
-        <input type="checkbox" checked="true" id="hide-suggested-posts" class="option">
-        <label for="hide-suggested-posts">Hide Suggested Posts</label><br>
-        <input type="checkbox" checked="true" id="hide-explore" class="option">
-        <label for="hide-explore">Hide Explore Button</label><br>
-        <input type="checkbox" checked="true" id="hide-reels" class="option">
-        <label for="hide-reels">Hide Reels Button</label><br>
-        <input type="checkbox" checked="true" id="hide-stories" class="option">
-        <label for="hide-stories">Hide Stories</label><br>
-        <input type="checkbox" checked="true" id="hide-comments" class="option">
-        <label for="hide-comments">Hide Comments</label><br>
-        <input type="checkbox" checked="true" id="hide-suggested-profiles" class="option">
-        <label for="hide-suggested-profiles">Hide Suggested Profiles</label><br>
-        <script src="options.js"></script>
-    </body>
+
+<head>
+    <link rel="stylesheet" href="options.css" />
+</head>
+
+<body>
+    <h1>Distraction-Less Instagram Options</h1>
+    <div id="optionsContainer">
+        <div class="option">
+            <input type="checkbox" checked="true" id="hide-suggested-posts" class="optionBox">
+            <label for="hide-suggested-posts" class="optionText">Hide Suggested Posts</label><br>
+        </div>
+        <div class="option">
+            <input type="checkbox" checked="true" id="hide-explore" class="optionBox">
+            <label for="hide-explore" class="optionText">Hide Explore Button</label><br>
+        </div>
+        <div class="option">
+            <input type="checkbox" checked="true" id="hide-reels" class="optionBox">
+            <label for="hide-reels" class="optionText">Hide Reels Button</label><br>
+        </div class="option">
+        <div class="option">
+            <input type="checkbox" checked="true" id="hide-stories" class="optionBox">
+            <label for="hide-stories" class="optionText">Hide Stories</label><br>
+        </div>
+        <!-- REMOVING COMMENTS IS IN PROGRESS
+            <div class="option">
+            <input type="checkbox" checked="true" id="hide-comments" class="optionBox">
+            <label for="hide-comments" class="optionText">Hide Comments</label><br>
+            </div>
+            -->
+        <div class="option">
+            <input type="checkbox" checked="true" id="hide-suggested-profiles" class="optionBox">
+            <label for="hide-suggested-profiles" class="optionText">Hide Suggested Profiles</label><br>
+        </div>
+    </div>
+    <script src="options.js"></script>
+</body>
+
 </html>

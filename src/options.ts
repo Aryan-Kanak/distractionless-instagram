@@ -1,4 +1,4 @@
-let options: HTMLCollectionOf<Element> = document.getElementsByClassName("option");
+let options: HTMLCollectionOf<Element> = document.getElementsByClassName("optionBox");
 for (let option of options) {
     let checkbox = option as HTMLInputElement;
     let id: string = checkbox.id;
@@ -11,6 +11,19 @@ for (let option of options) {
         let result = await chrome.storage.local.get(id);
         let curValue: boolean = result[id] as boolean;
         chrome.storage.local.set({ [id]: !curValue });
+
+        // update page when option is changed
+        let queryOptions = { active: true, lastFocusedWindow: true };
+        let [tab] = await chrome.tabs.query(queryOptions);
+        if (tab.id == null) {
+            return;
+        }
+        let tabId: number = tab.id;
+        chrome.scripting.executeScript(
+            {
+                target: { tabId: tabId },
+                files: ["hideContent.js"]
+        });
     });
 }
 

@@ -1,5 +1,5 @@
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-        if (changeInfo.status == "complete") {
+    if (changeInfo.status == "complete") {
         chrome.scripting.executeScript(
             {
                 target: { tabId: tabId },
@@ -20,4 +20,4 @@ chrome.webRequest.onCompleted.addListener(async function (details) {
             target: { tabId: tabId },
             files: ["hideContent.js"]
     });
-}, { urls: ["*://*/*"]});
+}, { urls: ["*://*/*"]}); // *://*/*
