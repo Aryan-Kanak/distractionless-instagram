@@ -35,6 +35,15 @@ export function hideSuggestedPosts(hidden: boolean = true): void {
 
     // remove posts
     while (i < suggestedPosts.length) {
+        // remove suggested posts in feed
+        if (suggestedPosts[i].innerHTML == "Suggested for you") {
+            let suggestedPost = suggestedPosts[i].parentElement?.parentElement?.parentElement;
+            if (suggestedPost?.nodeName == "ARTICLE") {
+                suggestedPost.style.display = hidden ? "none" : "block";
+            }
+        }
+
+        // find start of suggested posts section
         if (suggestedPosts[i].innerHTML == "Suggested Posts") {
             suggestedPosts[i].style.display = hidden ? "none" : "block";
             break;
@@ -96,13 +105,13 @@ export function hideSuggestedProfiles(hidden: boolean = true): void {
     let spans: HTMLCollectionOf<HTMLElement> = document.getElementsByTagName("span");
     let suggestedForYouText: HTMLElement | null = null;
     for (let i = 0; i < spans.length; ++i) {
-        if (spans[i].innerHTML == "Suggested for you") {
+        if (spans[i].innerHTML == "See All") {
             suggestedForYouText = spans[i];
             break;
         }
     }
     if (spans == null) {
-        console.log("ERROR: suggested for you text not found");
+        console.log("ERROR: See All text not found");
         return;
     }
     let suggestedProfiles: HTMLElement | null | undefined =
